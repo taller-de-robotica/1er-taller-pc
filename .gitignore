@@ -1,3 +1,7 @@
+# Pesos entrenados, el archivo es muy grande para gitHub
+*.hdf5
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
