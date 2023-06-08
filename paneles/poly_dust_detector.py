@@ -25,8 +25,6 @@ import numpy as np
 from matplotlib import pyplot as plt
 from patchify import patchify, unpatchify
 import cv2
-import matplotlib as mpl
-mpl.rcParams['figure.dpi'] = 330
 
 import argparse
 from termcolor import cprint
@@ -104,6 +102,7 @@ def show_images(original_image, dust_image):
     reconstructed = cv2.merge((reconstructed,reconstructed,reconstructed))
     twins = np.concatenate((original, reconstructed), axis=1)
     
+    ## Funciona en Ubuntu, debe funcionar también en Windows
     cprint('Max value: ' + str(np.max(dust_image)), MC)
     cprint("Press any key on the image to exit", MC)
     cv2.namedWindow("Image vs Unet prediction", cv2.WINDOW_GUI_NORMAL | cv2.WINDOW_AUTOSIZE)
@@ -111,13 +110,17 @@ def show_images(original_image, dust_image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     
+    ## Sólo funciona en Windows
+    #import matplotlib as mpl
+    #mpl.rcParams['figure.dpi'] = 330
+    
     #plt.figure(figsize=(10, 6))
     #plt.subplot(231)
     #plt.title('Image')
-    #plt.imshow(image, cmap='gray')
+    #plt.imshow(original_image, cmap='gray')
     #plt.subplot(232)
     #plt.title('Unet prediction')
-    #plt.imshow(reconstructed_image, cmap='gray')
+    #plt.imshow(dust_image, cmap='gray')
     #plt.show()
 
 
