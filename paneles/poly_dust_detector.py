@@ -58,7 +58,7 @@ def read_image(url):
     url: of the video stream
     returns an rgb image
     """
-    cap = cv2.VideoCapture(ip_address)
+    cap = cv2.VideoCapture(url)
     ret, img = cap.read()
     if not ret:
         cprint("Failed to capture frame from stream", MC)
