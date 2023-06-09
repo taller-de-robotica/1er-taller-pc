@@ -35,6 +35,9 @@ image_size = (1792, 1024)
 
 #LOAD_IMAGE FUNCTION
 def load_image(path, import_type='bgr_img'):
+    """
+    Loads image from specified file path.
+    """
     img=cv2.imread(path)
     res_img = cv2.resize(img, image_size, interpolation = cv2.INTER_LINEAR)
     if import_type == 'gray_img':
@@ -51,7 +54,7 @@ def load_image(path, import_type='bgr_img'):
 #UNET_PREDICTION FUNCTION
 def unet_prediction(image, model=None):
     """
-    Receives an RGB image and returns an numpy array where
+    Receives an RGB image and returns a 1D numpy array of ints where
     0 - Panel
     1 - Background
     2 - Dust
@@ -92,6 +95,9 @@ def unet_prediction(image, model=None):
     
 #OUTPUT: Plotting original and GT and prediction
 def show_images(original_image, dust_image):
+    """
+    Displays the original image and image with detected regions.
+    """
     cprint("Plotting image...", MC)
     scale = 5
     new_size = (image_size[0]//scale, image_size[1]//scale)
