@@ -50,7 +50,25 @@ def load_image(path, import_type='bgr_img'):
         load_img=False
         print("Incorrect import type.")
     return load_img
-
+    
+#READ_IMAGE FUNCTION
+def read_image(url):
+    """
+    Reads an image from the video stream
+    url: of the video stream
+    returns an rgb image
+    """
+    cap = cv2.VideoCapture(ip_address)
+    ret, img = cap.read()
+    if not ret:
+        cprint("Failed to capture frame from stream", MC)
+        return # break if no next frame
+    cv2.waitKey(0)
+    img = cv2.resize(img, image_size)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    cap.release()
+    return img
+        
 #UNET_PREDICTION FUNCTION
 def unet_prediction(image, model=None):
     """
@@ -141,16 +159,8 @@ if __name__ == '__main__':
     path_models="sm_unet4_03.hdf5" #path for hdf5 file with trained weights
     if args.ip:
         cprint("Reading image from stream...", MC)
-        ip_address = f"http://{args.ip}:8000/stream.mjpg"
-        cap = cv2.VideoCapture(ip_address)
-        ret, img = cap.read()
-        if not ret:
-            cprint("Failed to capture frame from stream", MC)
-            sys.exit(1) # break if no next frame
-        cv2.waitKey(1)
-        img = cv2.resize(img, image_size)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        cap.release()
+        url = f"http://{args.ip}:8000/stream.mjpg"
+        img = read_image(url)
     else:
         cprint("Reading image from file...", MC)
         path_image = "IMG_20221012_132227_DRO.png" #path for image
