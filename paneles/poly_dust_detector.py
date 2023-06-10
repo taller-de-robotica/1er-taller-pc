@@ -176,6 +176,7 @@ if __name__ == '__main__':
     unet_model = load_model(path_models, compile=False)
 
     ##### UNET_PREDICTION (run as needed, edit the path_image to predict in different images)  
+    #cprint(type(img), MC)
     img_dust = unet_prediction(img, model=unet_model)
     show_images(img, img_dust)
 
