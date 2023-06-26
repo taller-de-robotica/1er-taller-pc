@@ -1,6 +1,7 @@
 import socket
 
-UDP_IP = "10.10.56.8"
+#UDP_IP = "10.210.0.78"
+UDP_IP = "192.168.4.1"
 UDP_PORT = 8888
 
 print("UDP target IP: %s" % UDP_IP)

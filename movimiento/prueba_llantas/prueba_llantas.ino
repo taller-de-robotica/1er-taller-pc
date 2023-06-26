@@ -208,18 +208,25 @@ void init_GPIO()
    
   stop_Stop();
 }
+
 #include "WiFiEsp.h"
 #include "WiFiEspUdp.h"
-char ssid[] = "ENES"; // replace ****** with your network SSID (name)
-char pass[] = "En3sJ-2019"; // replace ****** with your network password
+
+// char ssid[] = "ENES"; // replace ****** with your network SSID (name)
+// char pass[] = "En3sJ-2019"; // replace ****** with your network password
+
+char ssid[] = "pcpuma"; // replace ****** with your network SSID (name)
+char pass[] = "mango2022"; // replace ****** with your network password
+
 int status = WL_IDLE_STATUS;
 // use a ring buffer to increase speed and reduce memory allocation
- char packetBuffer[5]; 
+char packetBuffer[5]; 
 WiFiEspUDP Udp;
 unsigned int localPort = 8888;  // local port to listen on
 void setup()
 {
- init_GPIO();
+  init_GPIO();
+  
   Serial.begin(9600);   // initialize serial for debugging
     Serial1.begin(115200);
     Serial1.write("AT+UART_DEF=9600,8,1,0,0\r\n");
@@ -257,13 +264,15 @@ void loop()
 {
   int packetSize = Udp.parsePacket();
   if (packetSize) {                               // if you get a client,
-     Serial.print("Received packet of size ");
-    Serial.println(packetSize);
+    Serial.print("Received packet of size ");
+    Serial.print(packetSize);
     int len = Udp.read(packetBuffer, 255);
     if (len > 0) {
       packetBuffer[len] = 0;
     }
       char c=packetBuffer[0];
+      Serial.print(" char: ");
+      Serial.println(c);
       switch (c)    //serial control instructions
       {  
         case '1':mover_1();break;
