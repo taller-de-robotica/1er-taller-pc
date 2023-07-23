@@ -35,6 +35,7 @@
 #define LeftMotorDirPin2B  8   // Rear Left Motor direction pin 2 to Model-Y M_A IN4 (K3)
 #define speedPinLB 12          // Rear Wheel PWM pin connect Model-Y M_A ENB
 
+//#define HOTSPOT
 
 ///
 /// Control de motores
@@ -296,8 +297,15 @@ void init_GPIO() {
 #include "WiFiEsp.h"
 #include "WiFiEspUdp.h"
 
+
+#ifndef HOTSPOT
 char ssid[] = "******"; // replace ****** with your network SSID (name)
 char pass[] = "******"; // replace ****** with your network password
+#else
+/// Si el robot será el hotspot
+char ssid[] = "osoyoo_robot"; 
+#endif
+
 
 int status = WL_IDLE_STATUS;
 // use a ring buffer to increase speed and reduce memory allocation
@@ -328,8 +336,14 @@ void init_WiFi() {
   while (status != WL_CONNECTED) {
     Serial.print("Attempting to connect to WPA SSID: ");
     Serial.println(ssid);
+    
+#ifndef HOTSPOT
     // Connect to WPA/WPA2 network
     status = WiFi.begin(ssid, pass);
+#else
+    //AP mode
+    status = WiFi.beginAP(ssid, 10, "", 0);
+#endif
   }
 
   Serial.println("You're connected to the network");
