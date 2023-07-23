@@ -16,10 +16,10 @@
  */
 #define SPEED 70    
 #define TURN_SPEED 140  
-#define SHIFT_SPEED 140  
+#define SHIFT_SPEED 140  // ¡Nunca se usa!
 
-#define TURN_TIME 500  
-#define MOVE_TIME 500  
+#define TURN_TIME 500    // ¡Nunca se usa!
+#define MOVE_TIME 500    // ¡Nunca se usa!
 
 #define speedPinR 9            // Front Wheel PWM pin connect Model-Y M_B ENA 
 #define RightMotorDirPin1 22   // Front Right Motor direction pin 1 to Model-Y M_B IN1  (K1)
