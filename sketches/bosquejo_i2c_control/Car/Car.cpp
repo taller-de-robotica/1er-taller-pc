@@ -99,6 +99,9 @@ double Encoder::count()
 Car::Car(const Wheel wheels[NUM_WHEELS], const Encoder encoders[NUM_WHEELS])
     : _wheels(wheels), _encoders(encoders){}
 
+Car::Car(const Wheel wheels[NUM_WHEELS])
+    : _wheels(wheels), _encoders(NULL){}
+
 void Car::begin()
 {
     for(int i = 0; i < NUM_WHEELS; i++)
@@ -106,8 +109,10 @@ void Car::begin()
       // Inicializa llanta
       _wheels[i].begin();
 
-      // Inicializa odómetro
-      _encoders[i].begin();
+      if(_encoders != NULL) {
+        // Inicializa odómetro
+        _encoders[i].begin();
+      }
     }
  }
 

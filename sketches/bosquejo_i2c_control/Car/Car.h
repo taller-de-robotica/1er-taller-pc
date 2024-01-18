@@ -60,6 +60,8 @@ public:
 
   Car(const Wheel wheels[NUM_WHEELS], const Encoder encoders[NUM_WHEELS]);
 
+  Car(const Wheel wheels[NUM_WHEELS]);
+
   void begin();
 
   // Mueve cada llanta una vez hacia adelante y hacia atrás.
